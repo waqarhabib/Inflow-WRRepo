@@ -66,17 +66,12 @@ public static class Extensions
         }
 
         services.AddCorsPolicy();
-        services.AddSwaggerGen(swagger =>
-        {
-            swagger.EnableAnnotations();
-            swagger.CustomSchemaIds(x => x.FullName);
-            swagger.SwaggerDoc("v1", new OpenApiInfo
-            {
-                Title = "Modular API",
-                Version = "v1"
-            });
-        });
-
+        
+        //services.AddSwaggerGen(c => {
+        //    c.SwaggerDoc("v1", new Info { Title = "Web API", Version = "v1" });
+        //    c.IncludeXmlComments($@"{System.AppDomain.CurrentDomain.BaseDirectory}\ABC.Application.WebApi.xml");
+        //    c.IncludeXmlComments($@"{System.AppDomain.CurrentDomain.BaseDirectory}\YourSharedClass.Models.xml");
+        //});
         var appOptions = services.GetOptions<AppOptions>("app");
         services.AddSingleton(appOptions);
 
@@ -122,7 +117,27 @@ public static class Extensions
                     
                 manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
             });
-            
+        foreach (var assembly in assemblies)
+        {
+            services.AddMvc().AddApplicationPart(assembly);
+        }
+
+
+        services.AddSwaggerGen(swagger =>
+        {
+            swagger.EnableAnnotations();
+            swagger.CustomSchemaIds(x => x.FullName);
+            swagger.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Modular API",
+                Version = "v1"
+            });
+            //swagger.
+            //foreach(var asbly in assemblies)
+            //{
+            //    swagger.IncludeXmlComments()
+            //}
+        });
         return services;
     }
 

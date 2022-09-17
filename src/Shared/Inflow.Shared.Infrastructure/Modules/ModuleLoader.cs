@@ -10,11 +10,17 @@ namespace Inflow.Shared.Infrastructure.Modules;
 
 public static class ModuleLoader
 {
+    public static IList<string> LoadConfigFiles()
+    {
+        var files = Directory.GetFiles($"{AppDomain.CurrentDomain.BaseDirectory}Modules", "module.*.json")
+            .ToList();
+        return files;
+    }
     public static IList<Assembly> LoadAssemblies(IConfiguration configuration, string modulePart)
     {
         var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
         var locations = assemblies.Where(x => !x.IsDynamic).Select(x => x.Location).ToArray();
-        var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll")
+        var files = Directory.GetFiles($"{AppDomain.CurrentDomain.BaseDirectory}Modules\\", "*.dll")
             .Where(x => !locations.Contains(x, StringComparer.InvariantCultureIgnoreCase))
             .ToList();
 
@@ -38,9 +44,9 @@ public static class ModuleLoader
         {
             files.Remove(disabledModule);
         }
-            
-        files.ForEach(x => assemblies.Add(AppDomain.CurrentDomain.Load(AssemblyName.GetAssemblyName(x))));
 
+        //files.ForEach(x => assemblies.Add(AppDomain.CurrentDomain.Load(AssemblyName.GetAssemblyName(x))));
+        files.ForEach(x => assemblies.Add(Assembly.LoadFrom(x)));
         return assemblies;
     }
 

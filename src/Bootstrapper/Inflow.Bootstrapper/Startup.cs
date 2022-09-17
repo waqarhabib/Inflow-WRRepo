@@ -11,6 +11,8 @@ using Inflow.Shared.Abstractions.Modules;
 using Inflow.Shared.Infrastructure;
 using Inflow.Shared.Infrastructure.Contracts;
 using Inflow.Shared.Infrastructure.Modules;
+using Humanizer.Configuration;
+using System;
 
 namespace Inflow.Bootstrapper;
 
@@ -18,13 +20,25 @@ public class Startup
 {
     private readonly IList<Assembly> _assemblies;
     private readonly IList<IModule> _modules;
-
-    public Startup(IConfiguration configuration)
+    public IConfiguration Configuration { get; }
+    //public Startup(IConfiguration configuration)
+    //{
+    //    _assemblies = ModuleLoader.LoadAssemblies(configuration, "Inflow.Modules.");
+    //    _modules = ModuleLoader.LoadModules(_assemblies);
+    //}
+    public Startup()
     {
-        _assemblies = ModuleLoader.LoadAssemblies(configuration, "Inflow.Modules.");
+        var confBuilder = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json");
+        var configFiles = ModuleLoader.LoadConfigFiles();
+        foreach (var config in configFiles)
+        {
+            confBuilder.AddJsonFile(config);
+        }
+        Configuration = confBuilder.Build();
+        _assemblies = ModuleLoader.LoadAssemblies(Configuration, "Inflow.Modules.");
         _modules = ModuleLoader.LoadModules(_assemblies);
+        // Configuraion = confBuilder.Build();
     }
-
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();
