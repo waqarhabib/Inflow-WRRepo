@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Inflow.Shared.Infrastructure.Messaging.Outbox;
 using Inflow.Shared.Infrastructure.Postgres;
 using Inflow.Shared.Infrastructure.Sqlite;
+using Inflow.Shared.Infrastructure.MongoDb;
 
 [assembly: InternalsVisibleTo("Inflow.Modules.Customers.Api")]
 [assembly: InternalsVisibleTo("Inflow.Modules.Customers.Tests.Integration")]
@@ -22,7 +23,8 @@ internal static class Extensions
         return services
             .AddSingleton<IUserApiClient, UserApiClient>()
             .AddScoped<ICustomerRepository, CustomerRepository>()
-            .AddSqlite<CustomersDbContext>()
+            .AddMongoDb<CustomersDbContext>()
+            //.AddSqlite<CustomersDbContext>()
             //.AddPostgres<CustomersDbContext>()
             .AddOutbox<CustomersDbContext>()
             .AddUnitOfWork<CustomersUnitOfWork>();

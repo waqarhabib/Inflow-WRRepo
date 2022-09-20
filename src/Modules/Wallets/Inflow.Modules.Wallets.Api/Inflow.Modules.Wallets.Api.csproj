@@ -21,8 +21,8 @@
       <ProjectReference Include="..\Inflow.Modules.Wallets.Infrastructure\Inflow.Modules.Wallets.Infrastructure.csproj" />
     </ItemGroup>
 
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
       <Exec Command="if not exist .\..\..\..\Bootstrapper\Inflow.Bootstrapper\bin\Debug\net6.0\Modules mkdir .\..\..\..\Bootstrapper\Inflow.Bootstrapper\bin\Debug\net6.0\Modules&#xD;&#xA;&#xD;&#xA;      XCOPY &quot;$(TargetDir)*&quot; &quot;.\..\..\..\Bootstrapper\Inflow.Bootstrapper\bin\Debug\net6.0\Modules&quot; /S /Y" />
-    </Target>
+    </Target>-->
 
 </Project>

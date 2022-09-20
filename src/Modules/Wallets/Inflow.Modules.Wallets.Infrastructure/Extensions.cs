@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Inflow.Shared.Infrastructure.Messaging.Outbox;
 using Inflow.Shared.Infrastructure.Postgres;
 using Inflow.Shared.Infrastructure.Sqlite;
+using Inflow.Shared.Infrastructure.MongoDb;
 
 [assembly: InternalsVisibleTo("Inflow.Modules.Wallets.Api")]
 [assembly: InternalsVisibleTo("Inflow.Modules.Wallets.Tests.Contract")]
@@ -29,7 +30,8 @@ internal static class Extensions
             .AddScoped<ICorporateOwnerRepository, CorporateOwnerRepository>()
             .AddScoped<IIndividualOwnerRepository, IndividualOwnerRepository>()
             .AddScoped<IWalletRepository, WalletRepository>()
-            .AddSqlite<WalletsDbContext>()
+            .AddMongoDb<WalletsDbContext>()
+            //.AddSqlite<WalletsDbContext>()
             //.AddPostgres<WalletsDbContext>()
             .AddOutbox<WalletsDbContext>()
             .AddUnitOfWork<WalletsUnitOfWork>();

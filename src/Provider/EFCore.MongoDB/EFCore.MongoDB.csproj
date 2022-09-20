@@ -1,0 +1,101 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>MongoDB provider for Entity Framework Core.</Description>
+    <TargetFramework>net6.0</TargetFramework>
+    <MinClientVersion>3.6</MinClientVersion>
+    <AssemblyName>IoTSharp.EntityFrameworkCore.MongoDB</AssemblyName>
+    <RootNamespace>IoTSharp.EntityFrameworkCore.MongoDB</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>$(PackageTags);MongoDb;SQL API;EntityFrameworkCore;IoTSharp</PackageTags>
+    <ImplicitUsings>true</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageProjectUrl>https://github.com/IoTSharp/IoTSharp.EntityFrameworkCore.MongoDB</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>logo.jpg</PackageIcon>
+    <Company>IoTSharp</Company>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/IoTSharp/IoTSharp.EntityFrameworkCore.MongoDB.git</RepositoryUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Include="System.Diagnostics" />
+    <Using Include="System.Linq.Expressions" />
+    <Using Include="System.Reflection" />
+    <Using Include="Microsoft.EntityFrameworkCore" />
+    <Using Include="Microsoft.EntityFrameworkCore.ChangeTracking" />
+    <Using Include="Microsoft.EntityFrameworkCore.Diagnostics" />
+    <Using Include="Microsoft.EntityFrameworkCore.Design" />
+    <Using Include="Microsoft.EntityFrameworkCore.Infrastructure" />
+    <Using Include="Microsoft.EntityFrameworkCore.Metadata" />
+    <Using Include="Microsoft.EntityFrameworkCore.Metadata.Builders" />
+    <Using Include="Microsoft.EntityFrameworkCore.Metadata.Conventions" />
+    <Using Include="Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure" />
+    <Using Include="Microsoft.EntityFrameworkCore.Query" />
+    <Using Include="Microsoft.EntityFrameworkCore.Storage" />
+    <Using Include="Microsoft.EntityFrameworkCore.Storage.ValueConversion" />
+    <Using Include="Microsoft.EntityFrameworkCore.Update" />
+    <Using Include="Microsoft.EntityFrameworkCore.ValueGeneration" />
+    <Using Include="Microsoft.EntityFrameworkCore.Utilities" />
+    <Using Include="Microsoft.Extensions.Logging" />
+    <Using Include="Microsoft.Extensions.DependencyInjection" />
+    <Using Include="MongoDB.Driver" />
+    <Using Include="MongoDB.Bson" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\logo.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+ 
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.14.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\MongoDBStrings.Designer.cs">
+      <DependentUpon>MongoDBStrings.Designer.tt</DependentUpon>
+      <!--<DesignTime>True</DesignTime>-->
+     
+      <!--<AutoGen>True</AutoGen>-->
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\MongoDBStrings.Designer.tt">
+      <CustomToolNamespace></CustomToolNamespace>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MongoDBStrings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\MongoDBStrings.resx">
+      <CustomToolNamespace>IoTSharp.EntityFrameworkCore.MongoDB.Internal</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+
+</Project>

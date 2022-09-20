@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Inflow.Shared.Infrastructure.Messaging.Outbox;
 using Inflow.Shared.Infrastructure.Postgres;
 using Inflow.Shared.Infrastructure.Sqlite;
+using IoTSharp.EntityFrameworkCore.MongoDB.Extensions;
+using Inflow.Shared.Infrastructure.MongoDb;
 
 [assembly: InternalsVisibleTo("Inflow.Modules.Payments.Api")]
 [assembly: InternalsVisibleTo("Inflow.Modules.Payments.Tests.Integration")]
@@ -35,7 +37,8 @@ internal static class Extensions
             .AddSingleton<ICurrencyResolver, CurrencyResolver>()
             .AddSingleton<IDepositAccountFactory, DepositAccountFactory>()
             //.AddPostgres<PaymentsDbContext>()
-            .AddSqlite<PaymentsDbContext>()
+            //.AddSqlite<PaymentsDbContext>()
+            .AddMongoDb<PaymentsDbContext>()
             .AddOutbox<PaymentsDbContext>()
             .AddUnitOfWork<PaymentsUnitOfWork>();
     }

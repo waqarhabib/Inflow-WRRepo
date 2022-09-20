@@ -15,8 +15,8 @@ internal class UsersDbContext : DbContext
     {
         
     }
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlite(@"Data Source=SqliteDBFiles\SqliteUsersDB.db");
+    //protected override void OnConfiguring(DbContextOptionsBuilder options)
+    //    => options.UseSqlite(@"Data Source=SqliteDBFiles\SqliteUsersDB.db");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("users");

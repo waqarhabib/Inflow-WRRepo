@@ -34,6 +34,7 @@ using Inflow.Shared.Infrastructure.Queries;
 using Inflow.Shared.Infrastructure.Security;
 using Inflow.Shared.Infrastructure.Services;
 using Inflow.Shared.Infrastructure.Sqlite;
+using Inflow.Shared.Infrastructure.MongoDb;
 
 namespace Inflow.Shared.Infrastructure;
 
@@ -96,6 +97,7 @@ public static class Extensions
         services.AddLoggingDecorators();
         services.AddPostgres();
         services.AddSqlite();
+        services.AddMongoDb();
         services.AddOutbox();
         services.AddHostedService<DbContextAppInitializer>();
         services.AddContracts();

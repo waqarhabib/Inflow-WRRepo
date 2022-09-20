@@ -10,6 +10,7 @@ using Inflow.Shared.Infrastructure;
 using Inflow.Shared.Infrastructure.Messaging.Outbox;
 using Inflow.Shared.Infrastructure.Postgres;
 using Inflow.Shared.Infrastructure.Sqlite;
+using Inflow.Shared.Infrastructure.MongoDb;
 
 [assembly: InternalsVisibleTo("Inflow.Modules.Users.Api")]
 [assembly: InternalsVisibleTo("Inflow.Modules.Users.Tests.Integration")]
@@ -32,7 +33,8 @@ internal static class Extensions
             .AddScoped<IUserRepository, UserRepository>()
             .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
             //.AddPostgres<UsersDbContext>()
-            .AddSqlite<UsersDbContext>()
+            //.AddSqlite<UsersDbContext>()
+            .AddMongoDb<UsersDbContext>()
             .AddOutbox<UsersDbContext>()
             .AddUnitOfWork<UsersUnitOfWork>()
             .AddInitializer<UsersInitializer>();
